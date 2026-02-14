@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 
 interface ImageCarouselProps {
   images: string[];
@@ -106,12 +107,16 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
       onTouchEnd={handleTouchEnd}
     >
       {tripleImages.map((img, i) => (
-        <div key={i} className="flex-shrink-0">
-          <img
+        <div key={i} className="flex-shrink-0 relative h-72 w-72 md:h-96 md:w-96">
+          <Image
             src={`/gallery/${img}`}
             alt={`Klíma szerelés ${(i % images.length) + 1}`}
-            className="h-72 w-72 rounded-xl object-cover object-center shadow-lg md:h-96 md:w-96 pointer-events-none"
+            fill
+            sizes="(max-width: 768px) 288px, 384px"
+            className="rounded-xl object-cover object-center shadow-lg pointer-events-none"
             draggable={false}
+            loading="lazy"
+            quality={75}
           />
         </div>
       ))}
