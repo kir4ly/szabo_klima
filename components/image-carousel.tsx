@@ -12,7 +12,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [autoScrollSpeed] = useState(1);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number>(null);
 
   // Triple the images for seamless infinite scroll
   const tripleImages = [...images, ...images, ...images];
