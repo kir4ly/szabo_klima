@@ -97,7 +97,7 @@ export default function Page() {
               Szabó Klíma
             </h1>
             <p className="mb-6 text-lg text-muted-foreground md:text-xl">
-              Klíma beszerelés, karbantartás és javítás Budapesten és Pest megyében.
+              Klíma beszerelés, karbantartás és javítás Pest és Borsod megyében, valamint Tokaj 30 km-es körzetében.
               Több mint 15 év tapasztalat, minden munkára garancia.
             </p>
           </div>
@@ -495,7 +495,7 @@ export default function Page() {
             </a>
 
             <p className="mb-10 text-lg text-muted-foreground">
-              Budapest és környéke
+              Pest megye, Borsod megye, Tokaj és környéke
             </p>
 
             <a
@@ -592,7 +592,7 @@ export default function Page() {
                 </a>
                 <div className="flex items-center gap-2 text-background/70">
                   <MapPin className="size-4" />
-                  Budapest és környéke
+                  Pest megye, Borsod megye, Tokaj és környéke
                 </div>
               </div>
                           </div>
