@@ -25,6 +25,7 @@ import {
   Snowflake,
 } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
+import { ImageCarousel } from "@/components/image-carousel";
 
 export default function Page() {
   return (
@@ -96,26 +97,16 @@ export default function Page() {
               Szabó Klíma
             </h1>
             <p className="mb-6 text-lg text-muted-foreground md:text-xl">
-              Megbízható klímaszerviz Budapesten és környékén. Gyors
-              helyszínelés, precíz munka, garanciális szolgáltatás.
+              Klíma beszerelés, karbantartás és javítás Budapesten és Pest megyében.
+              Több mint 15 év tapasztalat, minden munkára garancia.
             </p>
-            <a
-              href="tel:+36706215852"
-              className="inline-flex text-xl transition-all hover:brightness-110 font-light text-white tracking-tight h-16 rounded-full px-12 relative items-center justify-center"
-            >
-              <span className="absolute inset-0 rounded-full pointer-events-none bg-gradient-to-r from-sky-400/20 via-sky-300/30 to-sky-400/20 shadow-[0_0_22px_rgba(135,206,235,0.55)] ring-1 ring-sky-300/60" />
-              <span className="absolute inset-[3px] rounded-full pointer-events-none bg-gradient-to-b from-sky-400 via-sky-500 to-sky-300 shadow-[0_4px_12px_rgba(0,0,0,0.45)]" />
-              <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[70%] h-4 rounded-full blur-xl pointer-events-none bg-sky-300/35" />
-              <span className="font-medium z-10 relative">06 70 621 5852</span>
-            </a>
           </div>
         </div>
 
         {/* Infinite scrolling image gallery */}
-        <div className="w-full mb-8 bg-muted/30 border-y border-border/50 py-6 overflow-hidden">
-          <div className="flex animate-scroll-left">
-            {/* First set of images */}
-            {[
+        <div className="w-full mb-8 bg-muted/30 border-y border-border/50 py-8 overflow-hidden">
+          <ImageCarousel
+            images={[
               "IMG_4133.jpeg",
               "IMG_4675.jpeg",
               "IMG_4676.jpeg",
@@ -136,47 +127,8 @@ export default function Page() {
               "IMG_5027.jpeg",
               "IMG_5118.jpeg",
               "IMG_5480.jpeg",
-            ].map((img, i) => (
-              <div key={i} className="flex-shrink-0 px-2">
-                <img
-                  src={`/gallery/${img}`}
-                  alt={`Klíma szerelés ${i + 1}`}
-                  className="h-48 w-72 rounded-lg object-cover shadow-lg md:h-64 md:w-96"
-                />
-              </div>
-            ))}
-            {/* Duplicate set for seamless loop */}
-            {[
-              "IMG_4133.jpeg",
-              "IMG_4675.jpeg",
-              "IMG_4676.jpeg",
-              "IMG_4698.jpeg",
-              "IMG_4704.jpeg",
-              "IMG_4708.jpeg",
-              "IMG_4709.jpeg",
-              "IMG_4710.jpeg",
-              "IMG_4711.jpeg",
-              "IMG_4775.jpeg",
-              "IMG_4776.jpeg",
-              "IMG_4940.jpeg",
-              "IMG_4941.jpeg",
-              "IMG_4961.jpeg",
-              "IMG_5003.jpeg",
-              "IMG_5004.jpeg",
-              "IMG_5025.jpeg",
-              "IMG_5027.jpeg",
-              "IMG_5118.jpeg",
-              "IMG_5480.jpeg",
-            ].map((img, i) => (
-              <div key={`dup-${i}`} className="flex-shrink-0 px-2">
-                <img
-                  src={`/gallery/${img}`}
-                  alt={`Klíma szerelés ${i + 1}`}
-                  className="h-48 w-72 rounded-lg object-cover shadow-lg md:h-64 md:w-96"
-                />
-              </div>
-            ))}
-          </div>
+            ]}
+          />
         </div>
       </section>
 
