@@ -26,13 +26,15 @@ import {
 } from "lucide-react";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { ImageCarousel } from "@/components/image-carousel";
+import { MobileMenu } from "@/components/mobile-menu";
+import Image from "next/image";
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-foreground text-background">
       {/* Header */}
       <header className="sticky top-0 z-50 border-b border-background/10 bg-foreground/95 backdrop-blur supports-[backdrop-filter]:bg-foreground/60">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
           <div className="flex items-center gap-3">
             <div className="relative flex size-9 items-center justify-center">
               <span className="absolute inset-0 rounded-lg pointer-events-none bg-gradient-to-r from-sky-400/20 via-sky-300/30 to-sky-400/20 shadow-[0_0_22px_rgba(135,206,235,0.55)] ring-1 ring-sky-300/60" />
@@ -71,20 +73,21 @@ export default function Page() {
           </nav>
           <a
             href="tel:+36706215852"
-            className="inline-flex text-sm transition-all hover:brightness-110 font-light text-white tracking-tight h-9 rounded-full px-5 relative items-center justify-center"
+            className="hidden md:inline-flex text-sm transition-all hover:brightness-110 font-light text-white tracking-tight h-9 rounded-full px-5 relative items-center justify-center"
           >
             <span className="absolute inset-0 rounded-full pointer-events-none bg-gradient-to-r from-sky-400/20 via-sky-300/30 to-sky-400/20 shadow-[0_0_22px_rgba(135,206,235,0.55)] ring-1 ring-sky-300/60" />
             <span className="absolute inset-[3px] rounded-full pointer-events-none bg-gradient-to-b from-sky-400 via-sky-500 to-sky-300 shadow-[0_4px_12px_rgba(0,0,0,0.45)]" />
             <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[70%] h-4 rounded-full blur-xl pointer-events-none bg-sky-300/35" />
             <span className="font-medium z-10 relative">Hívjon most</span>
           </a>
+          <MobileMenu />
         </div>
       </header>
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-background">
         <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/5 via-transparent to-primary/10" />
-        <div className="mx-auto max-w-6xl px-6 py-12 md:py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 md:py-16">
           <div className="mx-auto max-w-3xl text-center">
             <span className="mb-4 inline-flex text-sm font-medium text-foreground tracking-tight h-8 items-center justify-center gap-2 rounded-full border border-border px-4">
               <span className="flex size-2">
@@ -93,12 +96,11 @@ export default function Page() {
               </span>
               <span>Hívjon minket most</span>
             </span>
-            <h1 className="mb-4 text-5xl font-bold tracking-tight text-foreground md:text-6xl lg:text-7xl">
+            <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl">
               Szabó Klíma
             </h1>
-            <p className="mb-6 text-lg text-muted-foreground md:text-xl">
-              Klíma beszerelés, karbantartás és javítás Pest és Borsod megyében, valamint Tokaj 30 km-es körzetében.
-              Több mint 15 év tapasztalat, minden munkára garancia.
+            <p className="mb-6 text-base text-muted-foreground sm:text-lg md:text-xl">
+              Klíma beszerelés, karbantartás és javítás Pest megyében, valamint Tokaj és Dabas vonzáskörzetében. Több mint 15 év tapasztalat, minden munkára garanciát vállalunk.
             </p>
           </div>
         </div>
@@ -133,10 +135,17 @@ export default function Page() {
       </section>
 
       {/* Services Section */}
-      <section id="szolgaltatasok" className="bg-background py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section id="szolgaltatasok" className="bg-background pt-0 pb-12 sm:pb-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <ScrollReveal>
             <div className="mb-14 text-center">
+              <Image
+                src="/logo.png"
+                alt="Szabó Klíma logó"
+                width={200}
+                height={100}
+                className="mx-auto mb-4 -mt-4 w-32 sm:w-40 md:w-48 rotate-90"
+              />
               <span className="mb-4 inline-flex text-sm transition-all font-light text-white tracking-tight h-7 rounded-full px-4 relative items-center justify-center">
                 <span className="absolute inset-0 rounded-full pointer-events-none bg-gradient-to-r from-orange-400/20 via-amber-300/30 to-orange-400/20 shadow-[0_0_22px_rgba(248,181,129,0.55)] ring-1 ring-amber-300/60" />
                 <span className="absolute inset-[2px] rounded-full pointer-events-none bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 shadow-[0_4px_12px_rgba(0,0,0,0.45)]" />
@@ -248,8 +257,8 @@ export default function Page() {
       </section>
 
       {/* Pricing Section */}
-      <section id="arak" className="bg-background py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section id="arak" className="bg-background py-12 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <ScrollReveal>
             <div className="mb-14 text-center">
               <span className="mb-4 inline-flex text-sm transition-all font-light text-white tracking-tight h-7 rounded-full px-4 relative items-center justify-center">
@@ -412,8 +421,8 @@ export default function Page() {
       </section>
 
       {/* Why Us Section */}
-      <section id="rolunk" className="border-t border-background/10 py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section id="rolunk" className="border-t border-background/10 py-12 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <ScrollReveal>
             <div className="mb-14 text-center">
               <span className="mb-4 inline-flex text-sm transition-all font-light text-white tracking-tight h-7 rounded-full px-4 relative items-center justify-center">
@@ -431,7 +440,7 @@ export default function Page() {
             </div>
           </ScrollReveal>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4">
             <ScrollReveal delay={0}>
               <div className="text-center">
               <div className="mb-2 text-4xl font-bold font-extrabold bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(248,181,129,0.5)]">15+</div>
@@ -476,31 +485,31 @@ export default function Page() {
       </section>
 
       {/* Contact Section */}
-      <section id="kapcsolat" className="bg-background py-20">
-        <div className="mx-auto max-w-6xl px-6">
+      <section id="kapcsolat" className="bg-background py-12 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <ScrollReveal>
             <div className="flex flex-col items-center text-center">
 <a
               href="tel:+36706215852"
-              className="mb-8 text-4xl font-bold tracking-tight text-foreground transition-colors hover:text-primary md:text-5xl lg:text-6xl"
+              className="mb-6 text-2xl font-bold tracking-tight text-foreground transition-colors hover:text-primary sm:text-3xl md:text-5xl lg:text-6xl"
             >
               +36 70 621 5852
             </a>
 
             <a
               href="mailto:szabozoltanklima@gmail.com"
-              className="mb-3 text-xl text-muted-foreground transition-colors hover:text-primary md:text-2xl"
+              className="mb-3 text-base text-muted-foreground transition-colors hover:text-primary sm:text-lg md:text-2xl break-all"
             >
               szabozoltanklima@gmail.com
             </a>
 
-            <p className="mb-10 text-lg text-muted-foreground">
-              Pest megye, Borsod megye, Tokaj és környéke
+            <p className="mb-8 text-base text-muted-foreground sm:text-lg">
+              Pest megye, Tokaj és Dabas vonzáskörzete
             </p>
 
             <a
               href="tel:+36706215852"
-              className="inline-flex text-xl transition-all hover:brightness-110 font-light text-white tracking-tight h-16 rounded-full px-12 relative items-center justify-center"
+              className="inline-flex text-base sm:text-lg md:text-xl transition-all hover:brightness-110 font-light text-white tracking-tight h-12 sm:h-14 md:h-16 rounded-full px-8 sm:px-10 md:px-12 relative items-center justify-center"
             >
               <span className="absolute inset-0 rounded-full pointer-events-none bg-gradient-to-r from-orange-400/20 via-amber-300/30 to-orange-400/20 shadow-[0_0_22px_rgba(248,181,129,0.55)] ring-1 ring-amber-300/60" />
               <span className="absolute inset-[3px] rounded-full pointer-events-none bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 shadow-[0_4px_12px_rgba(0,0,0,0.45)]" />
@@ -515,11 +524,11 @@ export default function Page() {
       {/* Footer */}
       <footer className="border-t border-background/10">
 
-        <div className="mx-auto max-w-6xl px-6 pt-16 pb-8">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 pt-12 sm:pt-16 pb-8">
           {/* Main footer content */}
-          <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-8 sm:gap-12 lg:grid-cols-4">
             {/* Brand */}
-            <div className="lg:col-span-1">
+            <div className="col-span-2 lg:col-span-1">
               <div className="mb-4 flex items-center gap-3">
                 <div className="relative flex size-10 items-center justify-center">
                   <span className="absolute inset-0 rounded-lg pointer-events-none bg-gradient-to-r from-sky-400/20 via-sky-300/30 to-sky-400/20 shadow-[0_0_22px_rgba(135,206,235,0.55)] ring-1 ring-sky-300/60" />
@@ -592,7 +601,7 @@ export default function Page() {
                 </a>
                 <div className="flex items-center gap-2 text-background/70">
                   <MapPin className="size-4" />
-                  Pest megye, Borsod megye, Tokaj és környéke
+                  Pest megye, Tokaj és Dabas vonzáskörzete
                 </div>
               </div>
                           </div>

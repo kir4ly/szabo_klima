@@ -113,7 +113,7 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
             alt={`Klíma szerelés ${(i % images.length) + 1}`}
             fill
             sizes="(max-width: 768px) 288px, 384px"
-            className="rounded-xl object-cover object-center shadow-lg pointer-events-none"
+            className="rounded-xl object-cover object-center shadow-lg pointer-events-none rotate-90"
             draggable={false}
             loading="lazy"
             quality={75}
