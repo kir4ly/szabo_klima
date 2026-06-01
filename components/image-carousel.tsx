@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import Image from "next/image";
 
 interface ImageCarouselProps {
@@ -9,102 +9,88 @@ interface ImageCarouselProps {
 
 export function ImageCarousel({ images }: ImageCarouselProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [autoScrollSpeed] = useState(1);
-  const animationRef = useRef<number>(null);
+  // Drag state lives in refs so the animation effect never re-runs (and never
+  // resets the scroll position) when a drag starts or ends. That re-run was
+  // what snapped the carousel back to the middle on every grab.
+  const isDraggingRef = useRef(false);
+  const startXRef = useRef(0);
+  const startScrollRef = useRef(0);
+  const animationRef = useRef<number | null>(null);
 
-  // Triple the images for seamless infinite scroll
+  // Triple the images for seamless infinite scroll.
   const tripleImages = [...images, ...images, ...images];
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    // Start from the middle set
-    const singleSetWidth = container.scrollWidth / 3;
-    container.scrollLeft = singleSetWidth;
+    const setWidth = () => container.scrollWidth / 3;
+
+    // Position at the middle set once, on mount only.
+    container.scrollLeft = setWidth();
 
     const autoScroll = () => {
-      if (!isDragging && container) {
-        container.scrollLeft += autoScrollSpeed;
-
-        // Reset to middle when reaching the end
-        if (container.scrollLeft >= singleSetWidth * 2) {
-          container.scrollLeft = singleSetWidth;
-        }
-        // Reset to middle when scrolling back past start
-        if (container.scrollLeft <= 0) {
-          container.scrollLeft = singleSetWidth;
-        }
+      const w = setWidth();
+      if (!isDraggingRef.current) {
+        container.scrollLeft += 1;
+      }
+      // Keep the viewport inside the middle copy so it loops seamlessly.
+      if (container.scrollLeft >= w * 2) {
+        container.scrollLeft -= w;
+      } else if (container.scrollLeft <= 0) {
+        container.scrollLeft += w;
       }
       animationRef.current = requestAnimationFrame(autoScroll);
     };
 
     animationRef.current = requestAnimationFrame(autoScroll);
-
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [isDragging, autoScrollSpeed, images.length]);
+  }, [images.length]);
 
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    setStartX(e.pageX - (containerRef.current?.offsetLeft || 0));
-    setScrollLeft(containerRef.current?.scrollLeft || 0);
+  const startDrag = (pageX: number) => {
+    const container = containerRef.current;
+    if (!container) return;
+    isDraggingRef.current = true;
+    startXRef.current = pageX;
+    startScrollRef.current = container.scrollLeft;
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const x = e.pageX - (containerRef.current?.offsetLeft || 0);
-    const walk = (x - startX) * 2;
-    if (containerRef.current) {
-      containerRef.current.scrollLeft = scrollLeft - walk;
+  const moveDrag = (pageX: number) => {
+    const container = containerRef.current;
+    if (!container || !isDraggingRef.current) return;
+    const w = container.scrollWidth / 3;
+    let target = startScrollRef.current - (pageX - startXRef.current);
+    // Wrap during the drag too, shifting the anchor so motion stays continuous.
+    if (target > w * 2) {
+      startScrollRef.current -= w;
+      target -= w;
+    } else if (target < 0) {
+      startScrollRef.current += w;
+      target += w;
     }
+    container.scrollLeft = target;
   };
 
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  const handleMouseLeave = () => {
-    setIsDragging(false);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    setStartX(e.touches[0].pageX - (containerRef.current?.offsetLeft || 0));
-    setScrollLeft(containerRef.current?.scrollLeft || 0);
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const x = e.touches[0].pageX - (containerRef.current?.offsetLeft || 0);
-    const walk = (x - startX) * 2;
-    if (containerRef.current) {
-      containerRef.current.scrollLeft = scrollLeft - walk;
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
+  const endDrag = () => {
+    isDraggingRef.current = false;
   };
 
   return (
     <div
       ref={containerRef}
       className="flex gap-4 overflow-x-hidden cursor-grab active:cursor-grabbing select-none"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
+      onMouseDown={(e) => {
+        e.preventDefault();
+        startDrag(e.pageX);
+      }}
+      onMouseMove={(e) => moveDrag(e.pageX)}
+      onMouseUp={endDrag}
+      onMouseLeave={endDrag}
+      onTouchStart={(e) => startDrag(e.touches[0].pageX)}
+      onTouchMove={(e) => moveDrag(e.touches[0].pageX)}
+      onTouchEnd={endDrag}
     >
       {tripleImages.map((img, i) => (
         <div key={i} className="flex-shrink-0 relative h-72 w-72 md:h-96 md:w-96">
@@ -113,10 +99,10 @@ export function ImageCarousel({ images }: ImageCarouselProps) {
             alt={`Klíma szerelés ${(i % images.length) + 1}`}
             fill
             sizes="(max-width: 768px) 288px, 384px"
-            className="rounded-xl object-cover object-center shadow-lg pointer-events-none rotate-90"
+            className="rounded-xl object-cover object-center shadow-lg pointer-events-none"
             draggable={false}
             loading="lazy"
-            quality={75}
+            quality={82}
           />
         </div>
       ))}

@@ -118,17 +118,19 @@ export default function Page() {
               "IMG_4709.jpeg",
               "IMG_4710.jpeg",
               "IMG_4711.jpeg",
-              "IMG_4775.jpeg",
               "IMG_4776.jpeg",
               "IMG_4940.jpeg",
               "IMG_4941.jpeg",
               "IMG_4961.jpeg",
               "IMG_5003.jpeg",
               "IMG_5004.jpeg",
-              "IMG_5025.jpeg",
               "IMG_5027.jpeg",
               "IMG_5118.jpeg",
               "IMG_5480.jpeg",
+              "IMG_7530.jpeg",
+              "IMG_7712.jpeg",
+              "IMG_7527.jpeg",
+              "IMG_7715.jpeg",
             ]}
           />
         </div>
@@ -283,7 +285,7 @@ export default function Page() {
               <CardHeader className="pb-2">
                 <CardDescription className="text-foreground text-lg font-semibold">Split klíma alapszerelés</CardDescription>
                 <CardTitle className="text-4xl">
-                  <span className="font-extrabold bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(248,181,129,0.5)]">85.000</span> <span className="text-xl font-normal">Ft</span>
+                  <span className="font-extrabold bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(248,181,129,0.5)]">90.000</span> <span className="text-xl font-normal">Ft</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -303,7 +305,7 @@ export default function Page() {
               <CardHeader className="pb-2">
                 <CardDescription className="text-foreground text-lg font-semibold">Split klíma alapszerelés</CardDescription>
                 <CardTitle className="text-4xl">
-                  <span className="font-extrabold bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(248,181,129,0.5)]">90.000</span> <span className="text-xl font-normal">Ft</span>
+                  <span className="font-extrabold bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(248,181,129,0.5)]">95.000</span> <span className="text-xl font-normal">Ft</span>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -406,6 +408,12 @@ export default function Page() {
                 <CardHeader className="text-center py-6">
                   <CardDescription className="text-lg">Plusz faláttörés</CardDescription>
                   <CardTitle className="text-3xl"><span className="font-extrabold bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(248,181,129,0.5)]">5.000</span> Ft</CardTitle>
+                </CardHeader>
+              </Card>
+              <Card className="border border-orange-400/50">
+                <CardHeader className="text-center py-6">
+                  <CardDescription className="text-lg">Klímatisztítás, karbantartás</CardDescription>
+                  <CardTitle className="text-3xl"><span className="font-extrabold bg-gradient-to-b from-orange-400 via-orange-500 to-amber-300 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(248,181,129,0.5)]">15.000</span> Ft</CardTitle>
                 </CardHeader>
               </Card>
               </div>
